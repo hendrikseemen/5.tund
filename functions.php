@@ -28,7 +28,7 @@
 	
 	function loginUser($email, $hash){
 		
-			$mysqli = new mysqli($GLOBALS["servername"], $GLOBALS["server_username"], $GLOBALS["server_password"], $GLOBALS["database"]);
+		$mysqli = new mysqli($GLOBALS["servername"], $GLOBALS["server_username"], $GLOBALS["server_password"], $GLOBALS["database"]);
 		$stmt = $mysqli->prepare("SELECT id, email FROM user_sample WHERE email=? AND password=?");
 		$stmt->bind_param("ss", $email, $hash);
 				
@@ -58,7 +58,21 @@
 		$mysqli->close();
 	}
 	
-	//Paneme ühenduse kinni
+	function addCarPlate($number_plate, $color){
+		
+		$mysqli = new mysqli($GLOBALS["servername"], $GLOBALS["server_username"], $GLOBALS["server_password"], $GLOBALS["database"]);
+		$stmt = $mysqli->prepare("INSERT INTO car_plates (user_id, number_plate, color) VALUES (?, ?, ?)");
+		echo $mysqli->error;
+		$stmt->bind_param("iss",$_SESSION["logged_in_user_id"], $number_plate, $color);
+		$stmt->execute();
+		echo $stmt->error;
+		
+		$stmt->close();
+		$mysqli->close();
+		
+	}
+	
+	
 	
 	
 ?>
