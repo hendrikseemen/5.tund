@@ -42,7 +42,7 @@
 				$hash = hash("sha512", $password);
 				
 				//kasutaja sisselogimise funktsioon, failist functions.php
-				loginUser();
+				loginUser($email, $hash);
 				
 			}
 
@@ -75,7 +75,7 @@
 				echo "Võib kasutajat luua! Kasutajanimi on ".$create_email." ja parool on ".$create_password."ja räsi on ".$hash;
 				
 				//kasutaja loomise funktsioon, failist functions.php
-				createUser();
+				createUser($create_email, $hash);
 				
 				
       }
